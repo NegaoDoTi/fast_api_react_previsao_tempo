@@ -12,6 +12,7 @@ pydantic = {extras = ["email"], version = "*"}
 alembic = "==1.16.4"
 sqlalchemy = "==2.0.42"
 passlib = {extras = ["bcrypt"], version = "*"}
+pyjwt = "==2.10.1"
 
 [dev-packages]
 

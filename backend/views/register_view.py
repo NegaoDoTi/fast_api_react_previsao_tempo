@@ -1,5 +1,4 @@
 from controllers.register_controller import RegisterController
-from schemas.message_schemas import ErrorMessage
 from schemas.user_schemas import UserCreatedResponse
 from fastapi.responses import JSONResponse
 from fastapi import status
@@ -12,6 +11,12 @@ class RegisterView:
         result = await self.__controller.register_user(username, email, password)
         
         if isinstance(result, dict):
-            return JSONResponse(ErrorMessage(message=result["message"]).dict(), status.HTTP_422_UNPROCESSABLE_ENTITY)
+            code = status.HTTP_400_BAD_REQUEST
+            
+            if "inesperado" in result["message"]:
+                code = status.HTTP_500_INTERNAL_SERVER_ERROR
+            
+            
+            return JSONResponse(result, code)
         
         return UserCreatedResponse(username=username, email=email, password=password)

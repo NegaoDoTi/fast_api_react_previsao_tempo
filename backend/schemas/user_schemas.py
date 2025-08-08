@@ -18,3 +18,7 @@ class UserRegisterForm(BaseModel):
 class UserCreatedResponse(BaseModel):
     username: str
     email: EmailStr
+    
+class UserToken(BaseModel):
+    token: str
+    token_type: str

@@ -14,9 +14,9 @@ class RegisterController:
             
             await self.users_service.create_user(username, email, hash_password)
         except IntegrityError as e:
-            return {"message" : f"Erro ao criar usuario o campo: {e.orig} já foi cadastrado"}
+            return {"message" : f"Username ou email já cadastrados"}
         except Exception:
             print(format_exc())
-            return {"message" : "Inesperado ao criar usuario tente novamente mais tarde"}
+            return {"message" : "Erro inesperado ao cadastrar usuario. Contate o ADM!"}
         
         return True
