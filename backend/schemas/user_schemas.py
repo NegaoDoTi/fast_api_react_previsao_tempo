@@ -15,6 +15,18 @@ class UserRegisterForm(BaseModel):
     ):
         return self(username=username, email=email, password=password)
     
+class UserLoginForm(BaseModel):
+    email: EmailStr
+    password: str
+    
+    @classmethod
+    def form(
+        self,
+        email: EmailStr = Form(...),
+        password: str = Form(...)
+    ):
+        return self(email=email, password=password)
+    
 class UserCreatedResponse(BaseModel):
     username: str
     email: EmailStr
