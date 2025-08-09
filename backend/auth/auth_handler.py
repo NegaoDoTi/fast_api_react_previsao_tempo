@@ -1,7 +1,8 @@
 from passlib.context import CryptContext
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from config.env import SECRECT_KEY, ALGORITHM
 import jwt
+from zoneinfo import ZoneInfo
 
 pwd_context = CryptContext(schemes=["bcrypt"])
 
@@ -14,9 +15,12 @@ def generate_password_hash(password:str) -> str:
 def generate_access_token(data : dict, expires_time: timedelta = timedelta(hours=1)) -> str:
     encode_data = data.copy()
     
-    expire = datetime.now() + expires_time
+    now = datetime.now(ZoneInfo("America/Sao_Paulo"))
+    expire = now + expires_time
+        
+    encode_data.update({"iat" : now})
     
-    encode_data.update({"expire" : expire.strftime("%d/%m/%Y %H:%M:%S")})
+    encode_data.update({"exp" : expire})
     
     encode_jwt = jwt.encode(encode_data, SECRECT_KEY, ALGORITHM)
     
