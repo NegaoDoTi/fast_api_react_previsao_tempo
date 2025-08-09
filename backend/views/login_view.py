@@ -23,4 +23,4 @@ class LoginView:
             
             return JSONResponse(result, code)
         
-        return UserToken(token=result, token_type="bearer")
+        return UserToken(token=result, token_type="Bearer")
