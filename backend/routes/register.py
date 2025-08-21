@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, Form
-from schemas.user_schemas import UserCreatedResponse, UserRegisterForm
+from schemas.user_schemas import UserRegisterForm
 from views.register_view import RegisterView
-from fastapi.responses import JSONResponse
 
 register_route = APIRouter()
 
